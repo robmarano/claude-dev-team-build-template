@@ -10,7 +10,12 @@ Use this repository as a **GitHub template** — click the "Use this template" b
 
 When you click "Use this template" and create a new repo from this one, you get:
 
-- A fully-configured **`team-build` Claude Code skill** installed at `.claude/skills/team-build/`
+- **Four pre-installed Claude Code skills:**
+  - `team-build` — orchestrates a full 8-agent principal-level dev team
+  - `github-kanban` — agile/kanban ticketing via `gh project` CLI
+  - `jira-agile` — JIRA Cloud ticketing via `jira-cli`, `acli`, or REST API
+  - `ticketing-setup` — first-run interview that helps you choose and configure one of the ticketing systems
+- **First-run auto-setup** via a SessionStart hook — when you first open Claude Code in your cloned project, it detects no ticketing is configured and walks you through setting up either GitHub Projects or JIRA Cloud securely
 - A sample project scaffold (`src/`, `tests/`, `docs/`, `examples/`)
 - A comprehensive **user guide** at [`.claude/skills/team-build/USER_GUIDE.md`](./.claude/skills/team-build/USER_GUIDE.md)
 - A sample first-use task in [`examples/first-task.md`](./examples/first-task.md) to try immediately
@@ -82,12 +87,28 @@ Or read [`examples/first-task.md`](./examples/first-task.md) for more ideas.
 ```
 .
 ├── .claude/
+│   ├── settings.json                 # SessionStart hook config
+│   ├── hooks/
+│   │   └── check-first-run.sh        # Detects missing ticketing config
 │   └── skills/
-│       └── team-build/
-│           ├── SKILL.md              # Skill definition & workflow overview
-│           ├── USER_GUIDE.md         # Comprehensive user guide
-│           └── references/
-│               └── workflow.md       # Detailed agent prompt templates
+│       ├── team-build/               # Full dev team orchestration
+│       │   ├── SKILL.md
+│       │   ├── USER_GUIDE.md
+│       │   └── references/workflow.md
+│       ├── github-kanban/            # GitHub Projects via gh CLI
+│       │   ├── SKILL.md
+│       │   └── references/
+│       │       ├── workflows.md
+│       │       ├── reports.md
+│       │       └── gh-project-cheatsheet.md
+│       ├── jira-agile/               # JIRA Cloud via jira-cli/acli/curl
+│       │   ├── SKILL.md
+│       │   └── references/
+│       │       ├── jira-cli.md
+│       │       ├── acli.md
+│       │       └── curl-rest.md
+│       └── ticketing-setup/          # First-run interview skill
+│           └── SKILL.md
 ├── src/                              # Your application source code
 │   └── .gitkeep
 ├── tests/                            # Test suites (populated by QA agents)
@@ -107,14 +128,26 @@ Or read [`examples/first-task.md`](./examples/first-task.md) for more ideas.
 
 ---
 
-## How the Skill Triggers
+## How the Skills Trigger
 
-The `team-build` skill activates when you:
+### `team-build`
+Activates when you:
 - Invoke the slash command: `/team-build <task description>`
 - Ask Claude to "use the full dev team" or "run a team workflow"
 - Describe a feature you want built end-to-end with engineering rigor
 
 For small fixes or questions, the skill steps aside and Claude handles the task directly.
+
+### `github-kanban` or `jira-agile`
+Activates automatically when you mention tickets, boards, sprints, epics, or other agile concepts. The specific skill that triggers depends on which system you chose during first-run setup (stored in `.claude/.ticketing-config.json`).
+
+### `ticketing-setup` (First-Run)
+Runs automatically the first time you open Claude Code in a project cloned from this template. The `SessionStart` hook in `.claude/settings.json` detects the missing `.claude/.ticketing-configured` marker and injects a reminder asking Claude to run the setup interview. You'll be asked:
+- GitHub Projects or JIRA Cloud?
+- Which CLI tool (for JIRA: `jira-cli`, `acli`, or `curl`)?
+- How to store credentials securely (OS keychain, direnv `.envrc`, or built-in config)?
+
+Once complete, the marker file is created and the reminder won't appear again. To reconfigure later, run `/ticketing-setup`.
 
 ---
 

@@ -25,11 +25,16 @@ desktop.ini
 *.sublime-workspace
 
 # ─── Claude Code ──────────────────────────────────────────────
-# Keep the skill, ignore local/ephemeral state
+# Keep the skills, hooks, and settings.json — ignore local/ephemeral state
 .claude/projects/
 .claude/settings.local.json
 .claude/state/
 .claude/*.log
+# First-run marker files (local state — each clone has its own)
+.claude/.ticketing-configured
+.claude/.ticketing-skipped
+# Ticketing config is committed so the team shares the choice.
+# NEVER put API tokens in it — only references to credential storage.
 
 # ─── Node / JavaScript / TypeScript ───────────────────────────
 node_modules/
@@ -103,3 +108,6 @@ secrets/
 credentials.json
 .env*
 !.env.example
+# direnv — .envrc often contains JIRA/GitHub API tokens
+.envrc
+!.envrc.example

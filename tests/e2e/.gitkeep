@@ -1,0 +1,3 @@
+# End-to-end tests go here.
+# Populated by the QA agent in Phase 4 of the team-build workflow,
+# when the test strategy includes e2e coverage.

@@ -1,0 +1,10 @@
+# This directory will hold your application source code.
+# The team-build skill's implementation agents (Phase 2) will populate this
+# with backend services, frontend components, and shared libraries as you
+# run /team-build commands.
+#
+# Organize as you see fit — common patterns:
+#   src/
+#     backend/        # Backend services, APIs, data layer
+#     frontend/       # Frontend components, pages, state
+#     shared/         # Cross-cutting types, utils, constants

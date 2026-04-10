@@ -62,8 +62,12 @@ Try the included sample task:
 
 Or read [`examples/first-task.md`](./examples/first-task.md) for more ideas.
 
-### 4. Read the Full Guide
-The [`USER_GUIDE.md`](./.claude/skills/team-build/USER_GUIDE.md) covers:
+### 4. Read the Guides
+
+**New to this template?** Start with the step-by-step CLI walkthrough:
+- **[USING-THIS-TEMPLATE.md](./docs/USING-THIS-TEMPLATE.md)** — full CLI guide from prerequisites to first commit
+
+**Ready to dig deeper?** The [`USER_GUIDE.md`](./.claude/skills/team-build/USER_GUIDE.md) covers:
 - Detailed phase-by-phase mechanics
 - A worked example (password reset flow)
 - Adaptive workflows for backend-only, frontend-only, and small tasks
@@ -91,6 +95,7 @@ The [`USER_GUIDE.md`](./.claude/skills/team-build/USER_GUIDE.md) covers:
 │   ├── integration/
 │   └── e2e/
 ├── docs/                             # Project documentation
+│   ├── USING-THIS-TEMPLATE.md        # Step-by-step CLI walkthrough for new users
 │   └── ARCHITECTURE.md               # Architecture decisions log
 ├── examples/
 │   ├── first-task.md                 # Sample task descriptions to try
